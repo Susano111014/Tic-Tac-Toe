@@ -3,34 +3,45 @@ function Tictactoe() {
     let player1;
     let player2;
 
-    const PlayerCreate = function (yourName) {
+
+    function PlayerCreate (yourName) {
         const player = {
             playerName: yourName,
-            choseX0 : '',
-            XO: function () { this.choseX0 = prompt('choose you character, X or O?')}
+            choseX0: '',
+            XO: function () { this.choseX0 = prompt('choose you character, X or O?') }
         }
         if (player1 == undefined) {
             player1 = player;
             player1.XO();
-        } else if (player1.choseX0 == 'X') {
+    
+        } else {
             player2 = player;
-            player2.choseX0 = 'O';
+            (player1.choseX0 == 'X')
+                ? player2.choseX0 = 'O'
+                : player2.choseX0 = 'X';
         }
-        return player;
     }
 
-    // const gameBoard = {
-    //     board: [
-    //         ['', '', ''],
-    //         ['', '', ''],
-    //         ['', '', '']
-    //     ]
-    // }
+    const gameBoard = {
+        board: [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ]
+    }
 
-    return { PlayerCreate };
+    function PutTokenInBoard (row, column, currentPlayer) {
+        gameBoard.board[row][column] = (currentPlayer == player1) ? player1.choseX0 : player2.choseX0;
+    }
 
-    //    function ifIsWin() {
-    //         gameBoard.board.every((row, index) => row[index] ===  )  
-    //    }
+    return { PlayerCreate, 
+        PutTokenInBoard, 
+        get getPlayer1 () {
+            return player1
+        },
+        get getPLayer2 () {
+            return player2
+        }
+    };
+
 };
-
